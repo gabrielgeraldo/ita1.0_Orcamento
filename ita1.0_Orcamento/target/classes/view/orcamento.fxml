@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="650.0" prefWidth="1305.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrcamentoController">
+   <children>
+      <Pane layoutX="241.0" layoutY="-1.0" prefHeight="66.0" prefWidth="1054.0" style="-fx-background-color: #3C8DBC;" />
+      <Label fx:id="labelCliente" layoutX="252.0" layoutY="121.0" prefHeight="28.0" prefWidth="53.0" text="Cliente: " />
+      <ComboBox fx:id="comboClientes" layoutX="305.0" layoutY="123.0" onAction="#selecionaCliente" prefHeight="25.0" prefWidth="296.0" />
+      <RadioButton fx:id="radioCodigo" layoutX="634.0" layoutY="216.0" mnemonicParsing="false" text="Código">
+         <toggleGroup>
+            <ToggleGroup fx:id="tipoPesquisaProduto" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radioDescricao" layoutX="714.0" layoutY="216.0" mnemonicParsing="false" selected="true" text="Descrição" toggleGroup="$tipoPesquisaProduto" />
+      <Spinner fx:id="spinnerQdt" initialValue="1" layoutX="884.0" layoutY="212.0" max="999" min="1" prefHeight="25.0" prefWidth="88.0" />
+      <TextField fx:id="textFieldPesquisaProduto" layoutX="985.0" layoutY="212.0" onAction="#pesquisaProduto" prefHeight="25.0" prefWidth="305.0" />
+      <TableView fx:id="tabelaProdutos" layoutX="628.0" layoutY="245.0" onKeyPressed="#selecionaLinhaTabelaProdutos" prefHeight="391.0" prefWidth="662.0">
+        <columns>
+          <TableColumn fx:id="codigoTabelaProdutos" prefWidth="127.0" text="Código" />
+            <TableColumn fx:id="descricaoTabelaProdutos" prefWidth="423.0" text="Descrição" />
+            <TableColumn fx:id="precoUnitarioTabelaProdutos" prefWidth="111.0" text="Preço Unitário" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tabelaItensOrcamento" layoutX="252.0" layoutY="245.0" onKeyPressed="#deletaLinhaTabelaItensOrcamento" prefHeight="391.0" prefWidth="369.0">
+        <columns>
+          <TableColumn fx:id="itemTabelaItensOrcamento" prefWidth="61.0" text="Item" />
+          <TableColumn fx:id="produtoTabelaItensOrcamento" prefWidth="175.00003051757812" text="Produto" />
+            <TableColumn fx:id="qtdTabelaItensOrcamento" prefWidth="43.0" text="QTD" />
+            <TableColumn fx:id="precoVendaTabelaItensOrcamento" prefWidth="89.0" text="Preço Venda" />
+        </columns>
+      </TableView>
+      <Label layoutX="804.0" layoutY="216.0" text="Quantidade:" />
+      <Label layoutX="1115.0" layoutY="127.0" text="Total:" />
+      <Label fx:id="labelTotal" layoutX="1191.0" layoutY="127.0" />
+      <VBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="637.0" prefWidth="241.0" spacing="20.0" style="-fx-background-color: #182226;">
+         <children>
+            <Pane prefHeight="66.0" prefWidth="241.0" style="-fx-background-color: #367FA9;" />
+            <JFXButton onAction="#clickBotaoFinalizar" onKeyPressed="#enterBotaoFinalizar" prefHeight="50.0" prefWidth="180.0" text="Finalizar ( F10 )" textFill="#e1d7d7" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
