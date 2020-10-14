@@ -106,7 +106,7 @@ public class OrcamentoController implements Initializable {
 		ObservableList<Cliente> lista = FXCollections.observableArrayList(WsUtil.getClientes());
 		comboClientes.setItems(lista);
 
-		WsUtil.getRazaoSocial();
+		// WsUtil.getRazaoSocial();
 
 	}
 
