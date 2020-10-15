@@ -243,7 +243,11 @@ public class WsUtil {
 			while ((output = br.readLine()) != null) {
 				json += output;
 			}
-			System.out.println(json);
+
+			// System.out.println(json);
+
+			razaoSocial = json;
+
 			conn.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();

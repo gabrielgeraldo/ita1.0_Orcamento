@@ -92,6 +92,9 @@ public class OrcamentoController implements Initializable {
 	@FXML
 	private Label labelTotal;
 
+	@FXML
+	private Label labelRazaoSocial;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -100,13 +103,13 @@ public class OrcamentoController implements Initializable {
 
 		this.preencherComboBoxCliente();
 
+		labelRazaoSocial.setText(WsUtil.getRazaoSocial());
+
 	}
 
 	public void preencherComboBoxCliente() {
 		ObservableList<Cliente> lista = FXCollections.observableArrayList(WsUtil.getClientes());
 		comboClientes.setItems(lista);
-
-		WsUtil.getRazaoSocial();
 
 	}
 
