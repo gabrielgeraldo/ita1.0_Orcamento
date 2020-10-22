@@ -208,7 +208,7 @@ public class WsUtil {
 
 				Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
 				dialogoInfo.setTitle("Orcamento");
-				// dialogoInfo.setHeaderText("Orcamento:");
+				dialogoInfo.setHeaderText("Mensagem!");
 				dialogoInfo.setContentText(output);
 				dialogoInfo.showAndWait();
 

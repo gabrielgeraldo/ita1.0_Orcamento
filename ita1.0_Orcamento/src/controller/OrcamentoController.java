@@ -293,7 +293,7 @@ public class OrcamentoController implements Initializable {
 
 		ChoiceDialog<Usuario> dialogoRegiao = new ChoiceDialog<Usuario>(null, lista);
 		dialogoRegiao.setTitle("Entrada de Usuário");
-		dialogoRegiao.setHeaderText("Informe seu usuário");
+		dialogoRegiao.setHeaderText("Informe seu usuário.");
 		dialogoRegiao.setContentText("Usuário:");
 
 		Usuario usuario = null;
@@ -304,7 +304,7 @@ public class OrcamentoController implements Initializable {
 
 		TextInputDialog dialogoNome = new TextInputDialog();
 		dialogoNome.setTitle("Entrada de senha");
-		dialogoNome.setHeaderText("Entre com sua senha");
+		dialogoNome.setHeaderText("Entre com sua senha.");
 		dialogoNome.setContentText("Senha:");
 
 		String senha = null;
@@ -317,7 +317,7 @@ public class OrcamentoController implements Initializable {
 
 		orcamento.setItens(itensOrcamento);
 
-		if (usuario.getSenha().equals(senha)) {
+		if (usuario != null && usuario.getSenha().equals(senha)) {
 
 			/*
 			 * System.out.println(orcamento.getCodigo());
@@ -346,12 +346,23 @@ public class OrcamentoController implements Initializable {
 			labelTotal.setText(orcamento.getTotal().toString());
 			tabelaProdutos.setItems(null);
 
+			comboClientes.requestFocus();
+
 		} else {
 			Alert dialogoAviso = new Alert(Alert.AlertType.WARNING);
 			dialogoAviso.setTitle("Atenção");
 			dialogoAviso.setHeaderText("Atenção");
-			dialogoAviso.setContentText("Senha inválida!");
+			dialogoAviso.setContentText("Usuário ou senha inválido!");
 			dialogoAviso.showAndWait();
+		}
+	}
+
+	@FXML
+	public void eventoQtdSpinner(KeyEvent event) {
+		System.out.println("teste1");
+		if (event.getCode() == KeyCode.ENTER) {
+			System.out.println("teste");
+			textFieldPesquisaProduto.requestFocus();
 		}
 	}
 
