@@ -109,7 +109,9 @@ public class OrcamentoController implements Initializable {
 
 	public void preencherComboBoxCliente() {
 		ObservableList<Cliente> lista = FXCollections.observableArrayList(WsUtil.getClientes());
+		// comboClientes.getItems().add(null);
 		comboClientes.setItems(lista);
+		// comboClientes.getItems().addAll(lista);
 
 	}
 
@@ -282,9 +284,48 @@ public class OrcamentoController implements Initializable {
 	}
 
 	@FXML
+	public void clickBotaoNovo(ActionEvent event) {
+		this.novo();
+	}
+
+	@FXML
 	public void enterBotaoFinalizar(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER)
 			this.finalizar();
+	}
+
+	@FXML
+	public void enterBotaoNovo(KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER)
+			this.novo();
+
+	}
+
+	@FXML
+	public void keyPressed(KeyEvent event) {
+		if (event.getCode() == KeyCode.F10) {
+			this.finalizar();
+		}
+
+		if (event.getCode() == KeyCode.F2) {
+			this.novo();
+		}
+	}
+
+	public void novo() {
+
+		this.setItemOrcamento(new ItemOrcamento());
+		this.setOrcamento(new Orcamento());
+		comboClientes.setItems(null);
+		this.preencherComboBoxCliente();
+		tabelaItensOrcamento.setItems(null);
+		itensOrcamento = new ArrayList<ItemOrcamento>();
+		orcamento.setTotal(new BigDecimal("0.00"));
+		labelTotal.setText(orcamento.getTotal().toString());
+		tabelaProdutos.setItems(null);
+		textFieldPesquisaProduto.setText("");
+
+		comboClientes.requestFocus();
 	}
 
 	public void finalizar() {
@@ -319,34 +360,9 @@ public class OrcamentoController implements Initializable {
 
 		if (usuario != null && usuario.getSenha().equals(senha)) {
 
-			/*
-			 * System.out.println(orcamento.getCodigo());
-			 * System.out.println(orcamento.getCliente());
-			 * System.out.println(orcamento.getData());
-			 * System.out.println(orcamento.getTotal());
-			 * System.out.println(orcamento.getUsuario());
-			 * 
-			 * for (int i = 0; i < orcamento.getItens().size(); i++) {
-			 * System.out.println(orcamento.getItens().get(i));
-			 * System.out.println(orcamento.getItens().get(i).getProduto());
-			 * System.out.println(orcamento.getItens().get(i).getQuantidade());
-			 * System.out.println(orcamento.getItens().get(i).getPrecoCusto());
-			 * System.out.println(orcamento.getItens().get(i).getPrecoVenda());
-			 * }
-			 */
-
 			WsUtil.finalizarPeloRest(orcamento);
 
-			this.setItemOrcamento(new ItemOrcamento());
-			this.setOrcamento(new Orcamento());
-			comboClientes.setItems(null);
-			this.preencherComboBoxCliente();
-			tabelaItensOrcamento.setItems(null);
-			orcamento.setTotal(new BigDecimal("0.00"));
-			labelTotal.setText(orcamento.getTotal().toString());
-			tabelaProdutos.setItems(null);
-
-			comboClientes.requestFocus();
+			this.novo();
 
 		} else {
 			Alert dialogoAviso = new Alert(Alert.AlertType.WARNING);
@@ -363,13 +379,6 @@ public class OrcamentoController implements Initializable {
 		if (event.getCode() == KeyCode.ENTER) {
 			System.out.println("teste");
 			textFieldPesquisaProduto.requestFocus();
-		}
-	}
-
-	@FXML
-	public void keyPressed(KeyEvent event) {
-		if (event.getCode() == KeyCode.F10) {
-			this.finalizar();
 		}
 	}
 

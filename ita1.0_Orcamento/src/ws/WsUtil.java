@@ -21,10 +21,13 @@ import model.Usuario;
 
 public class WsUtil {
 
+	// final static String URL = "132.255.41.136:8082";
+	final static String URL = "localhost:8080";
+
 	public static List<Cliente> getClientes() {
 		ArrayList<Cliente> lista = null;
 		try {
-			URL url = new URL("http://132.255.41.136:8082/ita/rest/cliente/getClientes");
+			URL url = new URL("http://" + URL + "/ita/rest/cliente/getClientes");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {
@@ -57,7 +60,7 @@ public class WsUtil {
 	public static List<Usuario> getUsuarios() {
 		ArrayList<Usuario> lista = null;
 		try {
-			URL url = new URL("http://132.255.41.136:8082/ita/rest/usuario/getUsuarios");
+			URL url = new URL("http://" + URL + "/ita/rest/usuario/getUsuarios");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {
@@ -97,7 +100,7 @@ public class WsUtil {
 		if (!cliente.isEmpty()) {
 
 			try {
-				URL url = new URL("http://132.255.41.136:8082/ita/rest/orcamento/completeCliente/" + cliente);
+				URL url = new URL("http://" + URL + "/ita/rest/orcamento/completeCliente/" + cliente);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				if (conn.getResponseCode() != 200) {
@@ -137,8 +140,8 @@ public class WsUtil {
 		if (!produto.isEmpty()) {
 
 			try {
-				URL url = new URL("http://132.255.41.136:8082/ita/rest/orcamento/completeProduto/" + tipoPesquisaProduto
-						+ "/" + produto);
+				URL url = new URL(
+						"http://" + URL + "/ita/rest/orcamento/completeProduto/" + tipoPesquisaProduto + "/" + produto);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				if (conn.getResponseCode() != 200) {
@@ -182,7 +185,7 @@ public class WsUtil {
 
 		try {
 
-			URL url = new URL("http://132.255.41.136:8082/ita/rest/orcamento/finalizarPeloRest");
+			URL url = new URL("http://" + URL + "/ita/rest/orcamento/finalizarPeloRest");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
@@ -230,7 +233,7 @@ public class WsUtil {
 		String razaoSocial = null;
 
 		try {
-			URL url = new URL("http://132.255.41.136:8082/ita/rest/orcamento/getRazaoSocial");
+			URL url = new URL("http://" + URL + "/ita/rest/orcamento/getRazaoSocial");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {
