@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import Util.Util;
+import controller.config.Config;
 import javafx.scene.control.Alert;
 import model.Cliente;
 import model.Orcamento;
@@ -21,8 +22,7 @@ import model.Usuario;
 
 public class WsUtil {
 
-	// final static String URL = "132.255.41.136:8082";
-	final static String URL = "localhost:8080";
+	final static String URL = Config.propertiesLoader().getProperty("enderecoServidor");
 
 	public static List<Cliente> getClientes() {
 		ArrayList<Cliente> lista = null;
