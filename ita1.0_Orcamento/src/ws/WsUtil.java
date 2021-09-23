@@ -12,13 +12,13 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import Util.Util;
 import controller.config.Config;
 import javafx.scene.control.Alert;
 import model.Cliente;
 import model.Orcamento;
 import model.Produto;
 import model.Usuario;
+import util.Util;
 
 public class WsUtil {
 
@@ -27,7 +27,7 @@ public class WsUtil {
 	public static List<Cliente> getClientes() {
 		ArrayList<Cliente> lista = null;
 		try {
-			URL url = new URL("http://" + URL + "/ita/rest/cliente/getClientes");
+			URL url = new URL("http://" + URL + "rest/cliente/getClientes");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {
@@ -60,7 +60,7 @@ public class WsUtil {
 	public static List<Usuario> getUsuarios() {
 		ArrayList<Usuario> lista = null;
 		try {
-			URL url = new URL("http://" + URL + "/ita/rest/usuario/getUsuarios");
+			URL url = new URL("http://" + URL + "rest/usuario/getUsuarios");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {
@@ -100,7 +100,7 @@ public class WsUtil {
 		if (!cliente.isEmpty()) {
 
 			try {
-				URL url = new URL("http://" + URL + "/ita/rest/orcamento/completeCliente/" + cliente);
+				URL url = new URL("http://" + URL + "rest/orcamento/completeCliente/" + cliente);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				if (conn.getResponseCode() != 200) {
@@ -141,7 +141,7 @@ public class WsUtil {
 
 			try {
 				URL url = new URL(
-						"http://" + URL + "/ita/rest/orcamento/completeProduto/" + tipoPesquisaProduto + "/" + produto);
+						"http://" + URL + "rest/orcamento/completeProduto/" + tipoPesquisaProduto + "/" + produto);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				if (conn.getResponseCode() != 200) {
@@ -174,7 +174,7 @@ public class WsUtil {
 		return lista;
 	}
 
-	public static void finalizarPeloRest(Orcamento orcamento) {
+	public static String finalizarPeloRest(Orcamento orcamento) {
 
 		// --- transformando em JSON --- //
 		Gson gson = new Gson(); // conversor
@@ -185,7 +185,7 @@ public class WsUtil {
 
 		try {
 
-			URL url = new URL("http://" + URL + "/ita/rest/orcamento/finalizarPeloRest");
+			URL url = new URL("http://" + URL + "rest/orcamento/finalizarPeloRest");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
@@ -212,8 +212,10 @@ public class WsUtil {
 				Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
 				dialogoInfo.setTitle("Orcamento");
 				dialogoInfo.setHeaderText("Mensagem!");
-				dialogoInfo.setContentText(output);
+				dialogoInfo.setContentText("Orcamento finalizado!");
 				dialogoInfo.showAndWait();
+
+				return output;
 
 			}
 
@@ -227,13 +229,15 @@ public class WsUtil {
 			Util.showExceptionDialog(e);
 		}
 
+		return null;
+
 	}
 
 	public static String getRazaoSocial() {
 		String razaoSocial = null;
 
 		try {
-			URL url = new URL("http://" + URL + "/ita/rest/orcamento/getRazaoSocial");
+			URL url = new URL("http://" + URL + "rest/orcamento/getRazaoSocial");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() != 200) {

@@ -39,13 +39,29 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.4</version>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
 						<goals>
 							<goal>shade</goal>
 						</goals>
+						<!-- DICIONADO PARA RODAR COM DEPENDENCIA DO MAVEN -->
+						<configuration>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<!-- We need to exclude the signatures for any signed jars otherwise 
+										we get an exception. -->
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+						<!-- DICIONADO PARA RODAR COM DEPENDENCIA DO MAVEN -->
 					</execution>
 				</executions>
 			</plugin>
@@ -73,10 +89,18 @@
 			<version>8.0.10</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
 		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.faces</artifactId>
-			<version>2.1.18</version>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.16.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/xalan/xalan -->
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.2</version>
 		</dependency>
 
 	</dependencies>

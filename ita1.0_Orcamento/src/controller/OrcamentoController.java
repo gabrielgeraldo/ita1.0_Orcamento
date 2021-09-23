@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import model.ItemOrcamento;
 import model.Orcamento;
 import model.Produto;
 import model.Usuario;
+import util.DanfeUtil;
 import ws.WsUtil;
 
 public class OrcamentoController implements Initializable {
@@ -226,7 +229,7 @@ public class OrcamentoController implements Initializable {
 		produtoTabelaItensOrcamento.setCellValueFactory(new PropertyValueFactory<>("produto"));
 
 		qtdTabelaItensOrcamento.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-
+		
 		precoVendaTabelaItensOrcamento.setCellValueFactory(new PropertyValueFactory<>("precoVenda"));
 
 		ObservableList<ItemOrcamento> lista = FXCollections.observableArrayList(itensOrcamento);
@@ -235,6 +238,8 @@ public class OrcamentoController implements Initializable {
 		labelTotal.setText(orcamento.getTotal().toString());
 
 		this.setItemOrcamento(new ItemOrcamento());
+		
+		spinnerQdt.getValueFactory().setValue(1);
 
 	}
 
@@ -330,6 +335,8 @@ public class OrcamentoController implements Initializable {
 
 	public void finalizar() {
 
+		String XML;
+
 		ObservableList<Usuario> lista = FXCollections.observableArrayList(WsUtil.getUsuarios());
 
 		ChoiceDialog<Usuario> dialogoRegiao = new ChoiceDialog<Usuario>(null, lista);
@@ -360,7 +367,17 @@ public class OrcamentoController implements Initializable {
 
 		if (usuario != null && usuario.getSenha().equals(senha)) {
 
-			WsUtil.finalizarPeloRest(orcamento);
+			XML = WsUtil.finalizarPeloRest(orcamento);
+
+			try {
+				DanfeUtil.imprimirOrcamento(XML);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			this.novo();
 
