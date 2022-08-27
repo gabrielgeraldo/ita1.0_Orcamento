@@ -192,7 +192,7 @@ public class WsUtil {
 			conn.setRequestProperty("Content-Type", "application/json");
 
 			String input = jsonOrcamento;
-			// System.out.println(input);
+			System.out.println(input);
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
 			os.flush();
